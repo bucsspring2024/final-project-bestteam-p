@@ -2,18 +2,18 @@
 
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
-# << Project Title >>
-## CS110 Final Project  << Semester, Year >>
+Mini Journey
+## CS110 Final Project  Spring 2024 
 
 ## Team Members
 
-<< List team member names >>
+Emily Goldstein
 
 ***
 
 ## Project Description
 
-<< Give an overview of your project >>
+My project will be a "Choose Your Own Adventure" type game. I want to create a mini journey for a little character, maybe a cute mouse or gnome, and the user's decisions will influence the journey. 
 
 ***    
 
@@ -31,11 +31,11 @@
 
 ### Features
 
-1. << Feature 1 >>
-2. << Feature 2 >>
-3. << Feature 3 >>
-4. << Feature 4 >>
-5. << Feature 5 >>
+1. start menu
+2. moveable character
+3. clickable options
+4. different routes
+5. final outcome screen 
 
 ### Classes
 
