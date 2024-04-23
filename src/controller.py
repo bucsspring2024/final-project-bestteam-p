@@ -4,9 +4,8 @@ from src import Mouse
 class Controller:
     def __init__(self):
         self.screen = pygame.display.set_mode((800, 600))
-        self.background = pygame.Surface(self.screen.get_size())
-        self.background_color = (135, 206, 250)
-        self.background.fill(self.background_color)
+        self.background = pygame.image.load('path_to_your_image.png')  # Load the image
+        self.background = pygame.transform.scale(self.background, (800, 600))  # Scale the image to fit the screen
         
     def mainloop(self):
         self.state = "menu"
