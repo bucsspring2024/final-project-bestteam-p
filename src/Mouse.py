@@ -15,4 +15,4 @@ class Mouse:
         self.rect.y += dy
         
     def draw(self, surface):
-        pygame.draw.rect(surface, (128, 128, 128), self.rect)
+        pygame.draw.rect(surface, (210, 125, 45), self.rect)

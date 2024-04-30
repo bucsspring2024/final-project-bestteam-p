@@ -5,35 +5,53 @@ from src.mouse import Mouse
 
 pygame. init()
 
-screen_width = 800
-screen_height = 600
+screen_width = 1000
+screen_height = 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 
 font = pygame.font.SysFont(None, 30)
 
-def draw_maze(arg = None):
-    num1 = (screen_height // 32)
-    num2 = (screen_width // 32)
-    for i in range(len(arg)):
-        for j in range(len(arg[i])):
-            if arg[i][j] == 1:
-                pygame.draw.line(screen, "blue", (j * num2 + (0.5 * num2), i * num1), 
-                                 (j * num2 + (0.5 * num2), i * num1 + num1), 3)
-            if arg[i][j] == 2:
-                pygame.draw.line(screen, "blue", (j * num2, i * num1 + (0.5 * num1)), 
-                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
-            
+# def draw_maze(arg = None):
+#     num1 = (screen_height // 32)
+#     num2 = (screen_width // 32)
+#     for i in range(len(arg)):
+#         for j in range(len(arg[i])):
+#             if arg[i][j] == 1:
+#                 pygame.draw.line(screen, "blue", (j * num2 + (0.5 * num2), i * num1), 
+#                                  (j * num2 + (0.5 * num2), i * num1 + num1), 3)
+#             if arg[i][j] == 2:
+#                 pygame.draw.line(screen, "blue", (j * num2, i * num1 + (0.5 * num1)), 
+#                                  (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
 
 maze = [
-    [2, 2, 2, 2, 2],
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-    [2, 2, 2, 2, 2]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+    [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
-    
 
+cell_size = screen_width // len(maze[0])
+
+def draw_maze(maze):    
+    for y, row in enumerate(maze):
+        for x, cell in enumerate(row):
+            if cell == 1:  # Wall
+                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+            elif cell == 0:  # Path
+                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+            
 
 
 #define movement variables
