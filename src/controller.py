@@ -4,7 +4,7 @@ from src import Mouse
 class Controller:
     def __init__(self):
         self.screen = pygame.display.set_mode((800, 600))
-        self.background = pygame.image.load('path_to_your_image.png')  # Load the image
+        self.background = pygame.image.load("assets/mountains.jpg")  # Load the image
         self.background = pygame.transform.scale(self.background, (800, 600))  # Scale the image to fit the screen
         
     def mainloop(self):
