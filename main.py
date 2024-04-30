@@ -13,14 +13,17 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 30)
 
 def draw_maze(arg = None):
-    for y, row in enumerate(maze):
-        for x, cell in enumerate(row):
-            if cell == 1:  # Wall
-                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
-            elif cell == 0:  # Path
-                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
-
-    
+    num1 = (screen_height // 32)
+    num2 = (screen_width // 32)
+    for i in range():
+        for j in range():
+            if arg[i][j] == 0:
+                pygame.draw.line(screen, "blue", (j * num2 + (0.5 * num2), i * num1), 
+                                 (j * num2 + (0.5 * num2), i * num1 + num1), 3)
+            if arg[i][j] == 1:
+                pygame.draw.line(screen, "blue", (j * num2, i * num1 + (0.5 * num1)), 
+                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
+            
 
 maze = [
     [1, 1, 1, 1, 1],
@@ -30,7 +33,6 @@ maze = [
     [1, 1, 1, 1, 1]
 ]
     
-cell_size = 100
 
 
 
