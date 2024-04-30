@@ -1,5 +1,6 @@
 import pygame
 from src.mouse import Mouse
+#  from src.maze import Maze
 
 
 pygame. init()
@@ -10,6 +11,16 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 
 font = pygame.font.SysFont(None, 30)
+
+def draw_maze(arg = None):
+    for y, row in enumerate(maze):
+        for x, cell in enumerate(row):
+            if cell == 1:  # Wall
+                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+            elif cell == 0:  # Path
+                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+
+    
 
 maze = [
     [1, 1, 1, 1, 1],
@@ -39,16 +50,10 @@ while run:
     #frame right
     clock.tick(60)
     
-    screen.fill("green")
+    screen.fill("black")
+    draw_maze(maze)
     
      # Draw the maze
-    for y, row in enumerate(maze):
-        for x, cell in enumerate(row):
-            if cell == 1:  # Wall
-                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
-            elif cell == 0:  # Path
-                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
-
     
     #calculate player movement
     dx = 0
