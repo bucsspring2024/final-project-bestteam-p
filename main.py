@@ -15,22 +15,22 @@ font = pygame.font.SysFont(None, 30)
 def draw_maze(arg = None):
     num1 = (screen_height // 32)
     num2 = (screen_width // 32)
-    for i in range():
-        for j in range():
-            if arg[i][j] == 0:
+    for i in range(len(arg)):
+        for j in range(len(arg[i])):
+            if arg[i][j] == 1:
                 pygame.draw.line(screen, "blue", (j * num2 + (0.5 * num2), i * num1), 
                                  (j * num2 + (0.5 * num2), i * num1 + num1), 3)
-            if arg[i][j] == 1:
+            if arg[i][j] == 2:
                 pygame.draw.line(screen, "blue", (j * num2, i * num1 + (0.5 * num1)), 
                                  (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
             
 
 maze = [
-    [1, 1, 1, 1, 1],
+    [2, 2, 2, 2, 2],
     [1, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1],
     [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1]
+    [1, 0, 0, 0, 1],
+    [2, 2, 2, 2, 2]
 ]
     
 
