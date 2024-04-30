@@ -7,9 +7,21 @@ pygame. init()
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-
-#create clock for frame rate
 clock = pygame.time.Clock()
+
+font = pygame.font.SysFont(None, 30)
+
+maze = [
+    [1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1]
+]
+    
+cell_size = 100
+
+
 
 #define movement variables
 moving_left = False
@@ -24,11 +36,20 @@ player = Mouse(100, 100)
 #main game loop
 run = True
 while run:
-    
-    #control frame rate
+    #frame right
     clock.tick(60)
     
     screen.fill("green")
+    
+     # Draw the maze
+    for y, row in enumerate(maze):
+        for x, cell in enumerate(row):
+            if cell == 1:  # Wall
+                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+            elif cell == 0:  # Path
+                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+
+    
     #calculate player movement
     dx = 0
     dy = 0
@@ -73,7 +94,7 @@ while run:
             if event.key == pygame.K_UP:
                 moving_up = False
             
-    pygame.display.update()
+    pygame.display.flip()
             
 pygame.quit()
 
