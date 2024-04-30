@@ -89,4 +89,6 @@ Test Case 5: Key Functionality
 -Test Steps:
     1. Start the game.
     2. Pick up the key. 
-    3. 
+    3. Walk to the exit with the key. 
+    4. Verify that the end screen is displayed.
+-Expected outcome: The end screen is displayed when the mouse goes through the exit with the key. 
