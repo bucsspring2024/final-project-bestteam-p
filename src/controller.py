@@ -4,8 +4,8 @@ from src import Mouse
 class Controller:
     def __init__(self):
         self.screen = pygame.display.set_mode((800, 600))
-        self.background = pygame.image.load("assets/mountains.jpg")  # Load the image
-        self.background = pygame.transform.scale(self.background, (800, 600))  # Scale the image to fit the screen
+        # self.background = pygame.image.load("assets/mountains.jpg")  # Load the image
+        # self.background = pygame.transform.scale(self.background, (800, 600))  # Scale the image to fit the screen
         
     def mainloop(self):
         self.state = "menu"
@@ -41,9 +41,10 @@ class Controller:
             self.screen.blit(self.background, (0, 0))
             pygame.draw.rect(self.screen, (255, 0, 0), start_button)
             pygame.display.flip()
-            
+        
     def gameloop(self):
         
     def gameoverloop(self):
         while True:
             if 
+    

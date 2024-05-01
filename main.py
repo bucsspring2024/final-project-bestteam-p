@@ -1,3 +1,6 @@
+# play around with math!!!!
+
+
 import pygame
 import math
 # from src.dog import Dog
@@ -55,6 +58,12 @@ class Maze:
                 elif cell == 0:  # Path
                     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size))
     
+    def is_wall(self, x, y):
+        a = x // self.cell_size
+        b = y // self.cell_size
+        #print(x, y, a, b)
+        return self.maze[a][b] == 1
+    
     # def check_position(self, x, y):
     #     valid_turns = []
 
@@ -80,11 +89,15 @@ my_maze = Maze(maze)
 
 class Dog:
     def __init__(self, x, y, maze):
+        print(x, y)
         self.image = pygame.image.load("assets/dog.png") 
-        self.image = pygame.transform.scale(self.image, (120, 120))  # Resize the image to 40x40 pixels
+        self.image = pygame.transform.scale(self.image, (maze.cell_size, maze.cell_size))  # Resize the image to 40x40 pixels
         self.rect = self.image.get_rect() 
-        self.rect.center = (x, y)
+        #self.rect.center = (x, y)
+        self.rect.x = x
+        self.rect.y = y
         self.maze = maze
+        print(x,y, self.rect.x, self.rect.y)
         
     # def move(self, dx, dy):
     #      # Calculate the new position
@@ -134,6 +147,8 @@ class Dog:
             self.rect.x += dx
             self.rect.y += dy
 
+# this is your controller
+# class Controller:
 cell_size = screen_width // len(maze[0])
 
 wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
@@ -156,7 +171,7 @@ def draw_maze(maze):
 
 
 #create player
-player = Dog(50, 82, my_maze)
+player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
 
 
 #main game loop
@@ -194,15 +209,15 @@ while run:
     # player.rect.y += dy
     
     # Update the game state
-    if moving_right:
+    print(player.rect.x, player.rect.y)
+    if moving_right and not my_maze.is_wall(player.rect.x + 3, player.rect.y):
         player.update('right')
-    elif moving_left:
+    elif moving_left and not my_maze.is_wall(player.rect.x - 3, player.rect.y):
         player.update('left')
-    if moving_up:
+    if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y-3):
         player.update('up')
-    elif moving_down:
+    elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y+3):
         player.update('down')
-    
     #draw player
     player.draw(screen)
     
