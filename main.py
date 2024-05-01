@@ -34,8 +34,6 @@ maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-# maze = Maze(maze_layout)
-# dog = Dog(maze)
 
 moving_left = False
 moving_right = False
@@ -64,27 +62,7 @@ class Maze:
         #print(x, y, a, b)
         return self.maze[a][b] == 1
     
-    # def check_position(self, x, y):
-    #     valid_turns = []
 
-    #     # Check the cell to the right
-    #     if x + 1 < len(self.layout[0]) and self.layout[y][x + 1] == 1:
-    #         valid_turns.append('right')
-
-    #     # Check the position to the left
-    #     if x - 1 >= 0 and self.layout[y][x - 1] == 1:
-    #         valid_turns.append('left')
-
-    #     # Check the position below
-    #     if y + 1 < len(self.layout) and self.layout[y + 1][x] == 1:
-    #         valid_turns.append('down')
-
-    #     # Check the position above
-    #     if y - 1 >= 0 and self.layout[y - 1][x] == 1:
-    #         valid_turns.append('up')
-
-    #     return valid_turns
-                    
 my_maze = Maze(maze)
 
 class Dog:
@@ -93,42 +71,20 @@ class Dog:
         self.image = pygame.image.load("assets/dog.png") 
         self.image = pygame.transform.scale(self.image, (maze.cell_size, maze.cell_size))  # Resize the image to 40x40 pixels
         self.rect = self.image.get_rect() 
-        #self.rect.center = (x, y)
         self.rect.x = x
         self.rect.y = y
         self.maze = maze
         print(x,y, self.rect.x, self.rect.y)
         
-    # def move(self, dx, dy):
-    #      # Calculate the new position
-    #     new_x = self.rect.x + dx
-    #     new_y = self.rect.y + dy
-
-    #     # Get the valid moves from the current position
-    #     valid_turns = self.maze.check_position(self.rect.x, self.rect.y)
-
-    #     # Only apply the move if it's valid
-    #     if dx > 0 and 'right' in valid_turns:
-    #         self.rect.x = new_x
-    #     elif dx < 0 and 'left' in valid_turns:
-    #         self.rect.x = new_x
-    #     if dy > 0 and 'down' in valid_turns:
-    #         self.rect.y = new_y
-    #     elif dy < 0 and 'up' in valid_turns:
-    #         self.rect.y = new_y
             
     def update(self, direction):
         if direction == 'right': 
-            # and 'right' in self.maze.check_position(self.rect.x, self.rect.y):
             self.rect.x += 3
         elif direction == 'left':
-            # and 'left' in self.maze.check_position(self.rect.x, self.rect.y):
             self.rect.x -= 3
         elif direction == 'up':
-            # and 'up' in self.maze.check_position(self.rect.x, self.rect.y):
             self.rect.y -= 3
         elif direction == 'down':
-            # and 'down' in self.maze.check_position(self.rect.x, self.rect.y):
             self.rect.y += 3
     
     def diagonal(self, dx, dy):
@@ -163,12 +119,6 @@ def draw_maze(maze):
                 pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
             
 
-#define movement variables
-# moving_left = False
-# moving_right = False
-# moving_down = False
-# moving_up = False
-
 
 #create player
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
@@ -183,30 +133,6 @@ while run:
     screen.fill("dark gray")
     draw_maze(maze)
     
-     # Draw the maze
-    
-    #calculate player movement
-    # direction = None
-    # dx = 0
-    # dy = 0
-    # if moving_left == True:
-    #     if 'left' in player.maze.check_position(player.rect.x, player.rect.y):
-    #         direction = 'left'
-    # if moving_right == True:
-    #      if 'right' in player.maze.check_position(player.rect.x, player.rect.y):
-    #         direction = 'right'
-    # if moving_down == True:
-    #     if 'down' in player.maze.check_position(player.rect.x, player.rect.y):
-    #         direction = 'down'
-    # if moving_up == True:
-    #     if 'up' in player.maze.check_position(player.rect.x, player.rect.y):
-    #         direction = 'up'
-    
-    # if direction is not None:
-    #     player.update(direction)
-    # #move player
-    # player.rect.x += dx
-    # player.rect.y += dy
     
     # Update the game state
     print(player.rect.x, player.rect.y)
@@ -214,14 +140,12 @@ while run:
         player.update('right')
     elif moving_left and not my_maze.is_wall(player.rect.x - 3, player.rect.y):
         player.update('left')
-    if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y-3):
+    if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y - 3):
         player.update('up')
-    elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y+3):
+    elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 3):
         player.update('down')
     #draw player
     player.draw(screen)
-    
-    # valid_turns = check_position(player.rect.x, player.rect.y)
     
     #event handler
     for event in pygame.event.get():
