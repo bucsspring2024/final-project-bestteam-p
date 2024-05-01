@@ -1,12 +1,12 @@
 import pygame
-from src.mouse import Mouse
+from src.dog import Dog
 #  from src.maze import Maze
 
 
 pygame. init()
 
-screen_width = 1000
-screen_height = 800
+screen_width = 1100
+screen_height = 900
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 
@@ -26,7 +26,7 @@ font = pygame.font.SysFont(None, 30)
 
 maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
@@ -44,11 +44,14 @@ maze = [
 
 cell_size = screen_width // len(maze[0])
 
+wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
+wall_image = pygame.transform.scale(wall_image, (cell_size, cell_size))
+
 def draw_maze(maze):    
     for y, row in enumerate(maze):
         for x, cell in enumerate(row):
             if cell == 1:  # Wall
-                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+                screen.blit(wall_image, (x * cell_size, y * cell_size, cell_size, cell_size))
             elif cell == 0:  # Path
                 pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
             
@@ -62,7 +65,7 @@ moving_up = False
 
 
 #create player
-player = Mouse(100, 100)
+player = Dog(50, 75)
 
 #main game loop
 run = True
@@ -70,7 +73,7 @@ while run:
     #frame right
     clock.tick(60)
     
-    screen.fill("black")
+    screen.fill("dark gray")
     draw_maze(maze)
     
      # Draw the maze

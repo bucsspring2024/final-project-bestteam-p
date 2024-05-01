@@ -1,9 +1,11 @@
 import pygame
 import math
 
-class Mouse:
+class Dog:
     def __init__(self, x, y):
-        self.rect = pygame.Rect(0, 0, 40, 40)
+        self.image = pygame.image.load("assets/dog.png") 
+        self.image = pygame.transform.scale(self.image, (120, 120))  # Resize the image to 40x40 pixels
+        self.rect = self.image.get_rect() 
         self.rect.center = (x, y)
         
     def move(self, dx, dy):
@@ -15,4 +17,4 @@ class Mouse:
         self.rect.y += dy
         
     def draw(self, surface):
-        pygame.draw.rect(surface, (210, 125, 45), self.rect)
+        surface.blit(self.image, self.rect)  # Draw the image onto the surface
