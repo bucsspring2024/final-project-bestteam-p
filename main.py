@@ -12,6 +12,8 @@ clock = pygame.time.Clock()
 
 font = pygame.font.SysFont(None, 30)
 
+valid_turns = [False, False, False, False]
+
 # def draw_maze(arg = None):
 #     num1 = (screen_height // 32)
 #     num2 = (screen_width // 32)
@@ -67,6 +69,24 @@ moving_up = False
 #create player
 player = Dog(50, 75)
 
+def check_position(x, y):
+    valid_turns = []
+
+    # Convert the player's position to maze coordinates
+    maze_x, maze_y = x // cell_size, y // cell_size
+
+    # Check the cells around the player's position
+    if maze[maze_y-1][maze_x] == 0:  # Check the cell above
+        valid_turns.append('up')
+    if maze[maze_y+1][maze_x] == 0:  # Check the cell below
+        valid_turns.append('down')
+    if maze[maze_y][maze_x-1] == 0:  # Check the cell to the left
+        valid_turns.append('left')
+    if maze[maze_y][maze_x+1] == 0:  # Check the cell to the right
+        valid_turns.append('right')
+
+    return valid_turns
+
 #main game loop
 run = True
 while run:
@@ -96,6 +116,9 @@ while run:
     
     #draw player
     player.draw(screen)
+    
+    valid_turns = check_position(player.rect.x, player.rect.y)
+    
     #event handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
