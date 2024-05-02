@@ -60,7 +60,7 @@ class Maze:
         a = x // self.cell_size
         b = y // self.cell_size
         #print(x, y, a, b)
-        return self.maze[a][b] == 1
+        return self.maze[b][a] == 1
     
 
 my_maze = Maze(maze)
@@ -78,14 +78,16 @@ class Dog:
         
             
     def update(self, direction):
+        # if self.maze.is_wall == 1:
         if direction == 'right': 
-            self.rect.x += 3
+            self.rect.x += 55
         elif direction == 'left':
-            self.rect.x -= 3
+            self.rect.x -= 55
         elif direction == 'up':
-            self.rect.y -= 3
+            self.rect.y -= 55
         elif direction == 'down':
-            self.rect.y += 3
+            self.rect.y += 55
+        print(self.rect.x, self.rect.y)
     
     def diagonal(self, dx, dy):
         #control diagonal speed
@@ -128,7 +130,7 @@ player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
 run = True
 while run:
     #frame right
-    clock.tick(60)
+    clock.tick(13)
     
     screen.fill("dark gray")
     draw_maze(maze)
@@ -136,13 +138,13 @@ while run:
     
     # Update the game state
     print(player.rect.x, player.rect.y)
-    if moving_right and not my_maze.is_wall(player.rect.x + 3, player.rect.y):
+    if moving_right and not my_maze.is_wall(player.rect.x + 55, player.rect.y):
         player.update('right')
-    elif moving_left and not my_maze.is_wall(player.rect.x - 3, player.rect.y):
+    elif moving_left and not my_maze.is_wall(player.rect.x - 55, player.rect.y):
         player.update('left')
-    if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y - 3):
+    if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y - 55):
         player.update('up')
-    elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 3):
+    elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 55):
         player.update('down')
     #draw player
     player.draw(screen)
