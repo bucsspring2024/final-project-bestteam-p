@@ -4,7 +4,7 @@ pygame.init()
 screen = pygame.display.set_mode((900, 700))
 
 background1 = pygame.image.load("assets/dungeon.jpeg")
-background1 = pygame.transform.scale(background1, (800, 600))
+background1 = pygame.transform.scale(background1, (900, 700))
 
 start_button = pygame.Rect(325, 560, 200, 50)
 font = pygame.font.Font(None, 36)
@@ -25,8 +25,8 @@ while run:
             screen.blit(background1, (0, 0))
             pygame.draw.rect(screen, (115, 147, 179), start_button)
             screen.blit(text, (start_button.x + 66, start_button.y + 12))
-            screen.blit(text2, (375, 220))
-            screen.blit(text3, (390, 330))
+            screen.blit(text2, (415, 220))
+            screen.blit(text3, (430, 330))
 
         # Update the display
         pygame.display.flip()
