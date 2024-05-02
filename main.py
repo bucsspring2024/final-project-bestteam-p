@@ -133,12 +133,12 @@ class Ghost:
         
     def move(self):
         if self.direction == 'up':
-            self.rect.y -= 20
-            if self.rect.y <= 0:  # If the ghost has reached the top of the screen
+            self.rect.y -= 30
+            if self.rect.y <= 110 :  # If the ghost has reached the top of the screen
                 self.direction = 'down'  # Change direction to down
         else:  # If direction is down
-            self.rect.y += 20
-            if self.rect.y >= screen_height - self.rect.height:  # If the ghost has reached the bottom of the screen
+            self.rect.y += 30
+            if self.rect.y >= 660:  # If the ghost has reached the bottom of the screen
                 self.direction = 'up'  # Change direction to up
 
 
@@ -161,7 +161,8 @@ exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
 ghosts = [
     Ghost(535, 550, my_maze),
-    Ghost(200, 400, my_maze)
+    Ghost(200, 400, my_maze),
+    Ghost(775, 320, my_maze)
 ]
 
 
