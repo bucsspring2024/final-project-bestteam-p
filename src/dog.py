@@ -1,13 +1,13 @@
 import pygame
 import math
-from maze import Maze
+from maze import Maze, maze
 screen_width = 1100
 screen_height = 900
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 
-my_maze = Maze(Maze)
-cell_size = cell_size = screen_width // len(my_maze[0])
+my_maze = Maze(maze)
+cell_size = screen_width // len(my_maze.maze[0])
 
 class Dog:
     def __init__(self, x, y, maze):

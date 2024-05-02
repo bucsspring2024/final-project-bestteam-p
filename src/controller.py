@@ -1,10 +1,10 @@
-from maze import Maze
+from maze import Maze, maze
 from dog import Dog
 from ghost import Ghost
 from door import Door
 
 
-my_maze = Maze()
+my_maze = Maze(maze)
 exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
 ghosts = [
@@ -110,7 +110,7 @@ class Controller:
             clock.tick(13)
     
             self.screen.fill("dark gray")
-            draw_maze(maze)
+            my_maze.draw_maze()
             
             
             # Update the game state
