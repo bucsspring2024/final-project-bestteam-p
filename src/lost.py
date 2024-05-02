@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((900, 700))
 
-background2 = pygame.image.load("assets/other.jpeg")
+background2 = pygame.image.load("assets/bad_ending.jpeg")
 background2 = pygame.transform.scale(background2, (900, 700))
 
 font4 = pygame.font.Font(None, 100)
