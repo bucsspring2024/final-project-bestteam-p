@@ -1,6 +1,3 @@
-# play around with math!!!!
-
-
 import pygame
 import math
 # from src.dog import Dog
@@ -34,7 +31,6 @@ maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-
 moving_left = False
 moving_right = False
 moving_down = False
@@ -48,14 +44,15 @@ class Maze:
         self.wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
         self.wall_image = pygame.transform.scale(self.wall_image, (self.cell_size, self.cell_size))
     
-    def draw_maze(self):
-        for y, row in enumerate(self.maze):
+    def draw_maze(maze):    
+        for y, row in enumerate(maze):
             for x, cell in enumerate(row):
                 if cell == 1:  # Wall
-                    screen.blit(self.wall_image, (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size))
+                    screen.blit(wall_image, (x * cell_size, y * cell_size, cell_size, cell_size))
                 elif cell == 0:  # Path
-                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size))
-    
+                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+                
+   
     def is_wall(self, x, y):
         a = x // self.cell_size
         b = y // self.cell_size
@@ -65,6 +62,21 @@ class Maze:
 
 my_maze = Maze(maze)
 
+
+class Door:
+    def __init__(self, x, y, maze):
+        self.image = pygame.image.load("assets/door.png")
+        self.image = pygame.transform.scale(self.image, (1.5 * maze.cell_size, 1.5 * maze.cell_size))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.maze = maze
+        
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+    
+    
+    
 class Dog:
     def __init__(self, x, y, maze):
         print(x, y)
@@ -113,16 +125,16 @@ wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
 wall_image = pygame.transform.scale(wall_image, (cell_size, cell_size))
       
 def draw_maze(maze):    
-    for y, row in enumerate(maze):
-        for x, cell in enumerate(row):
-            if cell == 1:  # Wall
-                screen.blit(wall_image, (x * cell_size, y * cell_size, cell_size, cell_size))
-            elif cell == 0:  # Path
-                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+        for y, row in enumerate(maze):
+            for x, cell in enumerate(row):
+                if cell == 1:  # Wall
+                    screen.blit(wall_image, (x * cell_size, y * cell_size, cell_size, cell_size))
+                elif cell == 0:  # Path
+                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
+                
+   
             
-
-
-#create player
+exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
 
 
@@ -146,7 +158,9 @@ while run:
         player.update('up')
     elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 55):
         player.update('down')
+        
     #draw player
+    exit.draw(screen)
     player.draw(screen)
     
     #event handler
