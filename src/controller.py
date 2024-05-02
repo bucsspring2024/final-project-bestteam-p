@@ -7,6 +7,9 @@ background1 = pygame.transform.scale(background1, (1100, 900))
 background2 = pygame.image.load("assets/bad_ending.jpeg")
 background2 = pygame.transform.scale(background2, (1100, 900))
 
+background3 = pygame.image.load("assets/woods.jpg")
+background3 = pygame.transform.scale(background3, (1100, 900))
+
 font = pygame.font.Font(None, 36)
 text = font.render("Start", True, (0, 0, 0))
 
@@ -21,6 +24,12 @@ text4 = font4.render("GAME OVER", True, (255, 255, 255))
 
 font5 = pygame.font.Font(None, 30)
 text5 = font5.render("Hopefully the next traveller fares better.", True, (255, 255, 255))
+
+font6 = pygame.font.Font(None, 100)
+text6 = font6.render("You Escaped", True, (255, 255, 255))
+
+font7 = pygame.font.Font(None, 30)
+text7 = font7.render("Somehow, you lived to see another day", True, (255, 255, 255))
 
 
 class Controller:
@@ -154,3 +163,15 @@ class Controller:
             self.screen.blit(text5, (265, 555))
             pygame.display.flip()
    
+    def wonloop(self):
+        won_running = True
+        
+        while won_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+            self.screen.blit(background3, (0, 0))
+            self.screen.blit(text6, (235, 343))
+            self.screen.blit(text7, (263, 430))
+            pygame.display.flip()
