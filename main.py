@@ -23,11 +23,11 @@ maze = [
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1],
     [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-    [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
@@ -36,6 +36,8 @@ moving_right = False
 moving_down = False
 moving_up = False
 
+pause = False
+pause_start = 0
 
 class Maze:
     def __init__(self, maze):
@@ -189,16 +191,28 @@ while run:
         player.update('down')
         
     #draw player
-    exit.draw(screen)
-    player.draw(screen)
-    for ghost in ghosts:
-        ghost.move()
-        ghost.draw(screen)
-    
-    if player.rect.colliderect(exit.rect):
-        pygame.time.delay(1000)
-        run = False
-    
+    if not pause:
+        exit.draw(screen)
+        player.draw(screen)
+        for ghost in ghosts:
+            ghost.move()
+            ghost.draw(screen)
+        
+            if player.rect.colliderect(ghost.rect):
+                pause = True
+                pause_start_time = pygame.time.get_ticks()
+
+        if player.rect.colliderect(exit.rect):
+            pause = True
+            pause_start_time = pygame.time.get_ticks()
+
+    else: 
+        # If the game is paused, check if a second has passed
+        if pygame.time.get_ticks() - pause_start_time >= 1000:
+            run = False
+        
+        
+        
     #event handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
