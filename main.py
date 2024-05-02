@@ -126,9 +126,20 @@ class Ghost:
         self.rect.x = x
         self.rect.y = y
         self.maze = maze
+        self.direction = 'up'
         
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+        
+    def move(self):
+        if self.direction == 'up':
+            self.rect.y -= 20
+            if self.rect.y <= 0:  # If the ghost has reached the top of the screen
+                self.direction = 'down'  # Change direction to down
+        else:  # If direction is down
+            self.rect.y += 20
+            if self.rect.y >= screen_height - self.rect.height:  # If the ghost has reached the bottom of the screen
+                self.direction = 'up'  # Change direction to up
 
 
 cell_size = screen_width // len(maze[0])
@@ -148,7 +159,7 @@ def draw_maze(maze):
             
 exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
-ghost = Ghost(500, 500, my_maze)
+ghost = Ghost(535, 550, my_maze)
 
 
 #main game loop
@@ -175,6 +186,7 @@ while run:
     #draw player
     exit.draw(screen)
     player.draw(screen)
+    ghost.move()
     ghost.draw(screen)
     
     if player.rect.colliderect(exit.rect):
