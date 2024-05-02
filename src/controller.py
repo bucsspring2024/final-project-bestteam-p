@@ -1,7 +1,7 @@
-from src.maze import Maze
-from src.door import Door
-from src.dog import Dog
-from src.ghost import Ghost
+from maze import Maze
+from door import Door
+from dog import Dog
+from ghost import Ghost
 
 my_maze = Maze()
 exit = Door(1015, 689, my_maze)
@@ -12,8 +12,18 @@ ghosts = [
     Ghost(775, 320, my_maze)
 ]
 
+moving_left = False
+moving_right = False
+moving_down = False
+moving_up = False
+
+
 import pygame
 pygame.init()
+
+clock = pygame.time.Clock()
+pause = False
+pause_start = 0
 
 background1 = pygame.image.load("assets/dungeon.jpeg")
 background1 = pygame.transform.scale(background1, (1100, 900))
