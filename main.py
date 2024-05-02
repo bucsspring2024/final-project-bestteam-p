@@ -159,7 +159,11 @@ def draw_maze(maze):
             
 exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
-ghost = Ghost(535, 550, my_maze)
+ghosts = [
+    Ghost(535, 550, my_maze),
+    Ghost(200, 400, my_maze)
+]
+
 
 
 #main game loop
@@ -186,8 +190,9 @@ while run:
     #draw player
     exit.draw(screen)
     player.draw(screen)
-    ghost.move()
-    ghost.draw(screen)
+    for ghost in ghosts:
+        ghost.move()
+        ghost.draw(screen)
     
     if player.rect.colliderect(exit.rect):
         pygame.time.delay(1000)
