@@ -1,7 +1,11 @@
 import pygame
+pygame.init()
 
 background1 = pygame.image.load("assets/dungeon.jpeg")
-background1 = pygame.transform.scale(background1, (900, 700))
+background1 = pygame.transform.scale(background1, (1100, 900))
+
+background2 = pygame.image.load("assets/bad_ending.jpeg")
+background2 = pygame.transform.scale(background2, (1100, 900))
 
 font = pygame.font.Font(None, 36)
 text = font.render("Start", True, (0, 0, 0))
@@ -12,10 +16,16 @@ text2 = font2.render("ESCAPE", True, (255, 255, 255))
 font3 = pygame.font.Font(None, 37)
 text3 = font3.render("Enter at your own risk.", True, (255, 255, 255))
 
+font4 = pygame.font.Font(None, 100)
+text4 = font4.render("GAME OVER", True, (255, 255, 255))
+
+font5 = pygame.font.Font(None, 30)
+text5 = font5.render("Hopefully the next traveller fares better.", True, (255, 255, 255))
+
 
 class Controller:
     def __init__(self):
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode((1100, 900))
         self.start_button = pygame.Rect(325, 570, 200, 50)
         
     def mainloop(self):
@@ -62,4 +72,85 @@ class Controller:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     return
+            #frame right
+            clock.tick(13)
+    
+            self.screen.fill("dark gray")
+            draw_maze(maze)
             
+            
+            # Update the game state
+            print(player.rect.x, player.rect.y)
+            if moving_right and not my_maze.is_wall(player.rect.x + 55, player.rect.y):
+                player.update('right')
+            elif moving_left and not my_maze.is_wall(player.rect.x - 55, player.rect.y):
+                player.update('left')
+            if moving_up and not my_maze.is_wall(player.rect.x, player.rect.y - 55):
+                player.update('up')
+            elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 55):
+                player.update('down')
+                
+            #draw player
+            if not pause:
+                exit.draw(self.screen)
+                player.draw(self.screen)
+                for ghost in ghosts:
+                    ghost.move()
+                    ghost.draw(self.screen)
+                
+                    if player.rect.colliderect(ghost.rect):
+                        pause = True
+                        pause_start_time = pygame.time.get_ticks()
+
+                if player.rect.colliderect(exit.rect):
+                    pause = True
+                    pause_start_time = pygame.time.get_ticks()
+
+            else: 
+                # If the game is paused, check if a second has passed
+                if pygame.time.get_ticks() - pause_start_time >= 1500:
+                    run = False
+                
+                
+                
+            #event handler
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                #keyboard commands
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        moving_left = True
+                    if event.key == pygame.K_RIGHT:
+                        moving_right = True
+                    if event.key == pygame.K_DOWN:
+                        moving_down = True
+                    if event.key == pygame.K_UP:
+                        moving_up = True
+                
+                #button release
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        moving_left = False
+                    if event.key == pygame.K_RIGHT:
+                        moving_right = False
+                    if event.key == pygame.K_DOWN:
+                        moving_down = False
+                    if event.key == pygame.K_UP:
+                        moving_up = False
+                    
+            pygame.display.flip()
+            
+        
+    def gameoverloop(self):
+        gameover_running = True
+        while gameover_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+            self.screen.blit(background2, (0, 0))
+            self.screen.blit(text4, (248, 480))
+            self.screen.blit(text5, (265, 555))
+            pygame.display.flip()
+   
