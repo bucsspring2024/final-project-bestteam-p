@@ -1,6 +1,6 @@
 from src.maze import Maze
-from src.dog import Dog
 from src.door import Door
+from src.dog import Dog
 from src.ghost import Ghost
 
 my_maze = Maze()
