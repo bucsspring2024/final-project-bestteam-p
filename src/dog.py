@@ -22,7 +22,6 @@ class Dog:
         
             
     def update(self, direction):
-        # if self.maze.is_wall == 1:
         if direction == 'right': 
             self.rect.x += 55
         elif direction == 'left':
