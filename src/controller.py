@@ -1,3 +1,17 @@
+from src.maze import Maze
+from src.dog import Dog
+from src.door import Door
+from src.ghost import Ghost
+
+my_maze = Maze()
+exit = Door(1015, 689, my_maze)
+player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
+ghosts = [
+    Ghost(535, 550, my_maze),
+    Ghost(200, 400, my_maze),
+    Ghost(775, 320, my_maze)
+]
+
 import pygame
 pygame.init()
 
@@ -112,13 +126,12 @@ class Controller:
                         pause_start_time = pygame.time.get_ticks()
 
                 if player.rect.colliderect(exit.rect):
-                    pause = True
-                    pause_start_time = pygame.time.get_ticks()
+                    self.state = "won"
 
             else: 
                 # If the game is paused, check if a second has passed
                 if pygame.time.get_ticks() - pause_start_time >= 1500:
-                    run = False
+                    self.state = "gameover"
                 
                 
                 
