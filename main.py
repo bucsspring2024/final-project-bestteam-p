@@ -15,7 +15,7 @@ font = pygame.font.SysFont(None, 30)
 
 maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+    [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
@@ -135,11 +135,11 @@ class Ghost:
         
     def move(self):
         if self.direction == 'up':
-            self.rect.y -= 30
+            self.rect.y -= 40
             if self.rect.y <= 110 :  # If the ghost has reached the top of the screen
                 self.direction = 'down'  # Change direction to down
         else:  # If direction is down
-            self.rect.y += 30
+            self.rect.y += 40
             if self.rect.y >= 660:  # If the ghost has reached the bottom of the screen
                 self.direction = 'up'  # Change direction to up
 
