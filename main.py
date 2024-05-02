@@ -117,8 +117,20 @@ class Dog:
             self.rect.x += dx
             self.rect.y += dy
 
-# this is your controller
-# class Controller:
+
+class Ghost:
+    def __init__(self, x, y, maze):
+        self.image = pygame.image.load("assets/ghost.png") 
+        self.image = pygame.transform.scale(self.image, (90, 90))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.maze = maze
+        
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+
+
 cell_size = screen_width // len(maze[0])
 
 wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
@@ -136,6 +148,7 @@ def draw_maze(maze):
             
 exit = Door(1015, 689, my_maze)
 player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
+ghost = Ghost(500, 500, my_maze)
 
 
 #main game loop
@@ -162,6 +175,11 @@ while run:
     #draw player
     exit.draw(screen)
     player.draw(screen)
+    ghost.draw(screen)
+    
+    if player.rect.colliderect(exit.rect):
+        pygame.time.delay(1000)
+        run = False
     
     #event handler
     for event in pygame.event.get():
