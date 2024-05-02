@@ -26,7 +26,7 @@ while run:
             pygame.draw.rect(screen, (115, 147, 179), start_button)
             screen.blit(text, (start_button.x + 66, start_button.y + 12))
             screen.blit(text2, (375, 220))
-            screen.blit(text3, (320, 400))
+            screen.blit(text3, (390, 330))
 
         # Update the display
         pygame.display.flip()
