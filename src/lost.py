@@ -19,8 +19,8 @@ while run:
             run = False
         else: 
             screen.blit(background2, (0, 0))
-            screen.blit(text4, (248, 500))
-            screen.blit(text5, (265, 585))
+            screen.blit(text4, (248, 480))
+            screen.blit(text5, (265, 555))
         pygame.display.flip()
             
 pygame.quit()
