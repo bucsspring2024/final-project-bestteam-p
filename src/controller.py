@@ -1,7 +1,8 @@
 from maze import Maze
-from door import Door
 from dog import Dog
 from ghost import Ghost
+from door import Door
+
 
 my_maze = Maze()
 exit = Door(1015, 689, my_maze)
@@ -10,7 +11,7 @@ ghosts = [
     Ghost(535, 550, my_maze),
     Ghost(200, 400, my_maze),
     Ghost(775, 320, my_maze)
-]
+] 
 
 moving_left = False
 moving_right = False
