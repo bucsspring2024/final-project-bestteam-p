@@ -7,7 +7,7 @@ import math
 pygame. init()
 
 screen_width = 1100
-screen_height = 900
+screen_height = 850
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 
@@ -193,10 +193,10 @@ while run:
     #draw player
     if not pause:
         exit.draw(screen)
-        player.draw(screen)
+        # player.draw(screen)
         for ghost in ghosts:
             ghost.move()
-            ghost.draw(screen)
+            # ghost.draw(screen)
         
             if player.rect.colliderect(ghost.rect):
                 pause = True

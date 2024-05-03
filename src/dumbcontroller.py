@@ -118,7 +118,7 @@ class Controller:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     return
-            #frame right
+            #frame rate
             clock.tick(13)
     
             self.screen.fill("dark gray")

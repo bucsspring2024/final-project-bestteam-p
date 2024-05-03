@@ -1,12 +1,14 @@
 import pygame
+from src.maze import Maze
+
 pygame.init()
 
 class Dog:
-    def __init__(self, x_coord, y_coord, maze):
+    def __init__(self, x_coord, y_coord):
         self.image = pygame.image.load("assets/dog.png")
         self.dog_x = x_coord
         self.dog_y = y_coord
-        self.board = maze
+        self.board = Maze()
       
     def move(self, direction):
         #takes direction from controller
