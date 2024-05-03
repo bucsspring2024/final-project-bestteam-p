@@ -41,6 +41,7 @@ class Controller:
         self.screen = pygame.display.set_mode((1100, 850))
         self.start_button = pygame.Rect(325, 570, 200, 50)
         self.pause = False
+        self.pause_start_time = 0
         
     def mainloop(self):
         self.state = "menu"
@@ -94,7 +95,7 @@ class Controller:
             [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
             [1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-            [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 2, 2],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
 
@@ -102,38 +103,90 @@ class Controller:
             cell_size = 55
             wall_image = pygame.image.load("assets/Grey_Brick.jpeg")
             wall_image = pygame.transform.scale(wall_image, (cell_size, cell_size))
+            exit = pygame.image.load("assets/door.png")
+            exit = pygame.transform.scale(exit, (1.5 * cell_size, 1.5 * cell_size))
                         #takes in a variable maze
             for y, row in enumerate(maze):
                             for x, cell in enumerate(row):
-                                if cell == 1:  # Wall
+                                if cell == 2:  # Door
+                                    self.screen.blit(exit, (x * cell_size, y * cell_size, cell_size, cell_size))
+                                elif cell == 1:  # Wall
                                     self.screen.blit(wall_image, (x * cell_size, y * cell_size, cell_size, cell_size))
                                 elif cell == 0:  # Path
                                     pygame.draw.rect(self.screen, (0, 0, 0), pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size))
-        
-        pygame.image.load("assets/door.png")
-        pygame.transform.scale(self.image, (1.5 * 55, 1.5 * 55))
-        self.rect = self.image.get_rect()
-        self.screen.blit(self.image, self.rect)
-        
+       
+       
         while game_running:
+            clock = pygame.time.Clock()
+            dog = Dog(55, 55)
+            ghost_list = [Ghost(535, 550), Ghost(200, 400), Ghost(775, 320)]
+            #frame rate
+            clock.tick(13)
+            dogImg = pygame.image.load("assets/dog.png")
+            dogImg = pygame.transform.scale(dogImg, (55, 55))
+            
+            ghostImg = pygame.image.load("assets/ghost.png")
+            self.screen.blit(dogImg, (55/55, 55//55))
+            for ghost in ghost_list:
+                self.screen.blit(ghostImg, (ghost.ghost_x//55, ghost.ghost_y//55))
+            movement = ""
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     return
-            clock = pygame.time.Clock()
-            dog = Dog(55, 55)
-            ghost_list = [Ghost(535, 550),
-            Ghost(200, 400),
-            Ghost(775, 320)
-            ]
-                #frame rate
-            clock.tick(13)
+                #sets movement for dog direction
+                #reset upon finishing dog,move()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        movement = "left"
+                    if event.key == pygame.K_RIGHT:
+                        movement = "right"
+                    if event.key == pygame.K_DOWN:
+                        movement = "down"
+                    if event.key == pygame.K_UP:
+                        movement = "up"
+                elif event.type == pygame.KEYUP:
+                    movement = ""
+                
+                if dog.move(movement):
+                    pygame.transform.scale(dog.image, (55, 55))
+                    dog.rect = dog.image.get_rect()
+                    self.screen.blit(dog.image, dog.rect)
+                    
+                    
+            else: 
+                # If the game is paused, check if a second has passed
+                if pygame.time.get_ticks() - self.pause_start_time >= 1500:
+                    self.state = "won"
+                    
+                    
+            pygame.display.flip()
             
-            if not self.pause:
-                dog.draw(self.screen)
-                for ghost in ghost_list:
-                    ghost.move()
-                    ghost.draw(self.screen)
+        
+    def gameoverloop(self):
+        gameover_running = True
+        while gameover_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+            self.screen.blit(background2, (0, 0))
+            self.screen.blit(text4, (248, 480))
+            self.screen.blit(text5, (265, 555))
+            pygame.display.flip()
+   
+    def wonloop(self):
+        won_running = True
+        
+        while won_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+            self.screen.blit(background3, (0, 0))
+            self.screen.blit(text6, (235, 343))
+            self.screen.blit(text7, (263, 430))
+            pygame.display.flip()
             
                         
         

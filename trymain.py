@@ -193,10 +193,10 @@ while run:
     #draw player
     if not pause:
         exit.draw(screen)
-        # player.draw(screen)
+        player.draw(screen)
         for ghost in ghosts:
             ghost.move()
-            # ghost.draw(screen)
+            ghost.draw(screen)
         
             if player.rect.colliderect(ghost.rect):
                 pause = True

@@ -13,7 +13,7 @@ Emily Goldstein
 
 ## Project Description
 
-My project will be a "Choose Your Own Adventure" type game. I want to create a mini journey for a little character, maybe a cute mouse or gnome, and the user's decisions will influence the journey. 
+My project is a simple dungeon-crawler style game with a dog character trying to get to the exit. It implements the arrow keys and has ghosts that will kill the dog if it touches them.
 
 ***    
 
@@ -33,13 +33,13 @@ My project will be a "Choose Your Own Adventure" type game. I want to create a m
 
 1. start menu
 2. moveable character
-3. clickable options
-4. different routes
+3. moving enemies
+4. wall barriers
 5. final outcome screen 
 
 ### Classes
 
-- << You should have a list of each of your classes with a description >>
+- Door: 
 
 ## ATP
 Test Case 1: Menu Screen Functionality 
