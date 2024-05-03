@@ -1,5 +1,5 @@
 import pygame
-from src.controller import Controller
+from dumbcontroller import Controller
 
 
 def main():

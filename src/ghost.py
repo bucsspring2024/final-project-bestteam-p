@@ -1,19 +1,12 @@
 import pygame
-
 pygame.init()
 
 class Ghost:
-    def __init__(self, x, y, maze):
-        self.image = pygame.image.load("assets/ghost.png") 
-        self.image = pygame.transform.scale(self.image, (90, 90))
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.maze = maze
+    def __init__(self, x_coord, y_coord):
+        self.image = pygame.image.load("assets/ghost.png")
         self.direction = 'up'
-        
-    def draw(self, surface):
-        surface.blit(self.image, self.rect)
+        self.ghost_x = x_coord
+        self.ghost_y = y_coord
         
     def move(self):
         if self.direction == 'up':
@@ -24,3 +17,8 @@ class Ghost:
             self.rect.y += 40
             if self.rect.y >= 660:  # If the ghost has reached the bottom of the screen
                 self.direction = 'up'  # Change direction to up
+                
+    def check_position(self):
+        #used by CONTROLLER to update dog pos
+        #return x and y coord of pixels
+        return[self.ghost_x, self.ghost_y]
