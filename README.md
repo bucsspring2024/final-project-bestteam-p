@@ -46,7 +46,10 @@ My project is a simple dungeon-crawler style game with a dog character trying to
 - Dog: Draws and establishes the movement of the game's protagonist.
 - Ghost: Draws and establishes the movement of the ghosts which can kill the protagonist.
 
-## ATP
+## ATP 
+*MY COMPUTER DID NOT SHOW THE ATP AS A TABULAR FASHION, ONLY AS AN OFFSET TABLE TYPE THING THAT WAS VERY DIFFICULT TO TYPE IN*
+
+
 Test Case 1: Menu Screen Functionality 
 -Test Description: Verify that the main menu buttons work.
 -Test Steps:
