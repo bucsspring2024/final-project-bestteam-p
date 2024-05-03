@@ -1,8 +1,9 @@
 import pygame
-from maze import Maze, maze
+from maze import Maze
 from dog import Dog
 from ghost import Ghost
 from ghost import Door
+from trymain import Dungeon
 
 pygame.init()
 
@@ -84,7 +85,7 @@ class Controller:
             if self.state == "menu":
                 self.menuloop()
             elif self.state == "game":
-                self.gameloop()
+                x = Dungeon
             elif self.state == "gameover":
                 self.gameoverloop()
             else:
