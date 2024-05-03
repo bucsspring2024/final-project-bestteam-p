@@ -2,8 +2,10 @@
 
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
-Mini Journey
+
 ## CS110 Final Project  Spring 2024 
+
+ESCAPE
 
 ## Team Members
 
@@ -21,11 +23,11 @@ My project is a simple dungeon-crawler style game with a dog character trying to
 
 ### Initial Design
 
-![initial gui](assets/gui.jpg)
+![initial gui](assets/gui.jpg) (<in the file listed, I could not get it to go in here.)
 
 ### Final Design
 
-![final gui](assets/finalgui.jpg)
+![final gui](assets/finalgui.jpg) (<in the file listed, I could not get it to go in here.)
 
 ## Program Design
 
@@ -39,7 +41,10 @@ My project is a simple dungeon-crawler style game with a dog character trying to
 
 ### Classes
 
-- Door: 
+- Maze: Maps out and draws the maze for the player to travel through. It also check if a cell acts as a wall inside. 
+- Door: Draws the door object that acts as an exit when the player collides with it.
+- Dog: Draws and establishes the movement of the game's protagonist.
+- Ghost: Draws and establishes the movement of the ghosts which can kill the protagonist.
 
 ## ATP
 Test Case 1: Menu Screen Functionality 

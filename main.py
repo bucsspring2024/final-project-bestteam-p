@@ -1,5 +1,5 @@
 import pygame
-from src.sadcontroller import Controller
+from controller import Controller
 
 
 def main():
