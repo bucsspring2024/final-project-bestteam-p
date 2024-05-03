@@ -1,26 +1,38 @@
+import pygame
 from maze import Maze, maze
 from dog import Dog
 from ghost import Ghost
 from door import Door
 
+pygame.init()
+
 
 my_maze = Maze(maze)
-exit = Door(1015, 689, my_maze)
-player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
-ghosts = [
-    Ghost(535, 550, my_maze),
-    Ghost(200, 400, my_maze),
-    Ghost(775, 320, my_maze)
-] 
+try:
+    exit = Door(1015, 689, my_maze)
+    player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
+    ghosts = [
+        Ghost(535, 550, my_maze),
+        Ghost(200, 400, my_maze),
+        Ghost(775, 320, my_maze)
+    ]
+except Exception as e:
+    print(f"Error creating game objects: {e}")
+    exit()
+# my_maze = Maze(maze)
+# exit = Door(1015, 689, my_maze)
+# player = Dog(my_maze.cell_size, my_maze.cell_size, my_maze)
+# ghosts = [
+#     Ghost(535, 550, my_maze),
+#     Ghost(200, 400, my_maze),
+#     Ghost(775, 320, my_maze)
+# ] 
 
 moving_left = False
 moving_right = False
 moving_down = False
 moving_up = False
 
-
-import pygame
-pygame.init()
 
 clock = pygame.time.Clock()
 pause = False
