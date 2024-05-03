@@ -1,6 +1,5 @@
 import pygame
 from src.controller import Controller
-from src.maze import Maze, maze
 
 
 def main():
