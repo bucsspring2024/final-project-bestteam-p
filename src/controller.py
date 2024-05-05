@@ -31,12 +31,6 @@ maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-moving_left = False
-moving_right = False
-moving_down = False
-moving_up = False
-
-pause = False
 pause_start = 0
 
 my_maze = Maze(maze)
@@ -124,14 +118,47 @@ class Controller:
     def gameloop(self):
         game_running = True
         run = True
+        
+        pause = False
+        
+        moving_left = False
+        moving_right = False
+        moving_down = False
+        moving_up = False
+
         while run:
             #frame right
             clock.tick(13)
                     
             screen.fill("dark gray")
-            draw_maze(maze)
+            my_maze.draw_maze(maze)
                     
-                    
+            #event handler
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                #keyboard commands
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        moving_left = True
+                    if event.key == pygame.K_RIGHT:
+                        moving_right = True
+                    if event.key == pygame.K_DOWN:
+                        moving_down = True
+                    if event.key == pygame.K_UP:
+                        moving_up = True
+                        
+            #button release
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        moving_left = False
+                    if event.key == pygame.K_RIGHT:
+                        moving_right = False
+                    if event.key == pygame.K_DOWN:
+                        moving_down = False
+                    if event.key == pygame.K_UP:
+                        moving_up = False
+                                
             # Update the game state
             print(player.rect.x, player.rect.y)
             if moving_right and not my_maze.is_wall(player.rect.x + 55, player.rect.y):
@@ -163,34 +190,7 @@ class Controller:
                 # If the game is paused, check if a second has passed
                 if pygame.time.get_ticks() - pause_start_time >= 1500:
                     run = False
-                        
-                        
-                        
-            #event handler
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    run = False
-                #keyboard commands
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
-                        moving_left = True
-                    if event.key == pygame.K_RIGHT:
-                        moving_right = True
-                    if event.key == pygame.K_DOWN:
-                        moving_down = True
-                    if event.key == pygame.K_UP:
-                        moving_up = True
-                        
-            #button release
-                elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LEFT:
-                        moving_left = False
-                    if event.key == pygame.K_RIGHT:
-                        moving_right = False
-                    if event.key == pygame.K_DOWN:
-                        moving_down = False
-                    if event.key == pygame.K_UP:
-                        moving_up = False
+    
                             
             pygame.display.flip()
                             

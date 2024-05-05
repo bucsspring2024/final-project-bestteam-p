@@ -1,6 +1,9 @@
 import pygame
 import math
 
+from src.maze import Maze
+
+
 class Dog:
     def __init__(self, x, y, maze):
         print(x, y)
@@ -8,7 +11,7 @@ class Dog:
         self.image = pygame.transform.scale(self.image, (maze.cell_size, maze.cell_size))  # Resize the image to 40x40 pixels
         self.rect = self.image.get_rect() 
         self.rect.x = x
-        self.rect.y = y
+        self.rect.y = y 
         self.maze = maze
         print(x,y, self.rect.x, self.rect.y)
                 
