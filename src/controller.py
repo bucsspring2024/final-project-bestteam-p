@@ -116,7 +116,6 @@ class Controller:
             pygame.display.flip()
             
     def gameloop(self):
-        game_running = True
         run = True
         
         pause = False
@@ -169,27 +168,47 @@ class Controller:
                 player.update('up')
             elif moving_down and not my_maze.is_wall(player.rect.x, player.rect.y + 55):
                 player.update('down')
+                
+                
+                
+            
+            exit.draw(screen)
+            player.draw(screen)
+            for ghost in ghosts:
+                ghost.move()
+                ghost.draw(screen)
                         
-            #draw player
-            if not pause:
-                exit.draw(screen)
-                player.draw(screen)
-                for ghost in ghosts:
-                    ghost.move()
-                    ghost.draw(screen)
-                        
-                    if player.rect.colliderect(ghost.rect):
-                        pause = True
-                        pause_start_time = pygame.time.get_ticks()
-
-                    if player.rect.colliderect(exit.rect):
-                        pause = True
-                        pause_start_time = pygame.time.get_ticks()
-
-            else: 
-                # If the game is paused, check if a second has passed
-                if pygame.time.get_ticks() - pause_start_time >= 1500:
+                if player.rect.colliderect(ghost.rect):
+                    run = False
                     self.state = "gameover"
+                    self.gameoverloop()
+
+                if player.rect.colliderect(exit.rect):
+                    run = False
+                    self.state = "won"
+                    self.wonloop()
+
+                   
+            # #draw player
+            # if not pause:
+            #     exit.draw(screen)
+            #     player.draw(screen)
+            #     for ghost in ghosts:
+            #         ghost.move()
+            #         ghost.draw(screen)
+                        
+            #         if player.rect.colliderect(ghost.rect):
+            #             pause = True
+            #             pause_start_time = pygame.time.get_ticks()
+
+            #         if player.rect.colliderect(exit.rect):
+            #             pause = True
+            #             pause_start_time = pygame.time.get_ticks()
+
+            # else: 
+            #     # If the game is paused, check if a second has passed
+            #     if pygame.time.get_ticks() - pause_start_time >= 1500:
+            #         self.state = "gameover"
     
                             
             pygame.display.flip()
