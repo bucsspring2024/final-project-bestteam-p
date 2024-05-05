@@ -61,10 +61,10 @@ text2 = font2.render("ESCAPE", True, (255, 255, 255))
 font3 = pygame.font.Font(None, 37)
 text3 = font3.render("Enter at your own risk.", True, (255, 255, 255))
 
-font4 = pygame.font.Font(None, 100)
+font4 = pygame.font.Font(None, 150)
 text4 = font4.render("GAME OVER", True, (255, 255, 255))
 
-font5 = pygame.font.Font(None, 30)
+font5 = pygame.font.Font(None, 40)
 text5 = font5.render("Hopefully the next traveller fares better.", True, (255, 255, 255))
 
 font6 = pygame.font.Font(None, 100)
@@ -78,7 +78,7 @@ text7 = font7.render("Somehow, you lived to see another day", True, (255, 255, 2
 class Controller:
     def __init__(self):
         self.screen = pygame.display.set_mode((1100, 900))
-        self.start_button = pygame.Rect(325, 570, 200, 50)
+        self.start_button = pygame.Rect(450, 650, 200, 50)
         
     def mainloop(self):
         self.state = "menu"
@@ -111,8 +111,8 @@ class Controller:
             self.screen.blit(background1, (0, 0))
             pygame.draw.rect(self.screen, (115, 147, 179), self.start_button)
             self.screen.blit(text, (self.start_button.x + 66, self.start_button.y + 12))
-            self.screen.blit(text2, (215, 75))
-            self.screen.blit(text3, (289, 182))
+            self.screen.blit(text2, (325, 75))
+            self.screen.blit(text3, (405, 190))
             pygame.display.flip()
             
     def gameloop(self):
@@ -201,8 +201,8 @@ class Controller:
                     pygame.quit()
                     return
             self.screen.blit(background2, (0, 0))
-            self.screen.blit(text4, (248, 480))
-            self.screen.blit(text5, (265, 555))
+            self.screen.blit(text4, (235, 480))
+            self.screen.blit(text5, (290, 600))
             pygame.display.flip()
    
     def wonloop(self):
