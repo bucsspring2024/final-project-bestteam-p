@@ -1,37 +1,41 @@
 import pygame
-from src.maze import Maze
-
-pygame.init()
+import math
 
 class Dog:
-    def __init__(self, x_coord, y_coord):
-        self.image = pygame.image.load("assets/dog.png")
-        self.dog_x = x_coord
-        self.dog_y = y_coord
-        self.board = Maze()
-      
-    def move(self, direction):
-        #takes direction from controller
-        #needs is_wall from maze to determine if loc = 1
-        if direction == 'right' and not self.board.is_wall((self.dog_x + 55)//55, (self.dog_y)//55):
-            self.dog_x += 55
+    def __init__(self, x, y, maze):
+        print(x, y)
+        self.image = pygame.image.load("assets/dog.png") 
+        self.image = pygame.transform.scale(self.image, (maze.cell_size, maze.cell_size))  # Resize the image to 40x40 pixels
+        self.rect = self.image.get_rect() 
+        self.rect.x = x
+        self.rect.y = y
+        self.maze = maze
+        print(x,y, self.rect.x, self.rect.y)
+                
+    def update(self, direction):
+        # if self.maze.is_wall == 1:
+        if direction == 'right': 
+            self.rect.x += 55
+        elif direction == 'left':
+            self.rect.x -= 55
+        elif direction == 'up':
+            self.rect.y -= 55
+        elif direction == 'down':
+            self.rect.y += 55
+        print(self.rect.x, self.rect.y)
             
-        elif direction == 'left' and not self.board.is_wall((self.dog_x - 55)//55, (self.dog_y)//55):
-            self.dog_x -= 55
-            
-        elif direction == 'up' and not self.board.is_wall((self.dog_x)//55, (self.dog_y - 55)//55):
-            self.dog_y -= 55
-            
-        elif direction == 'down' and not self.board.is_wall((self.dog_x)//55, (self.dog_y + 55)//55):
-            self.dog_y += 55
-            
-        if self.board.is_door(self.dog_x//55, self.dog_y//55):
-            return False
-        else:   
-            return True
-        
-        
-    def check_position(self):
-        #used by CONTROLLER to update dog pos
-        #return x and y coord of pixels
-        return[self.dog_x, self.dog_y]
+    def diagonal(self, dx, dy):
+        #control diagonal speed
+        if dx != 0 and dy != 0:
+            dx = dx * (math.sqrt(2) / 2)
+            dy = dy * (math.sqrt(2) / 2)
+        self.rect.x += dx
+        self.rect.y += dy
+                
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+
+    def move(self, dx, dy):
+        if self.maze.check_position(self.rect.x + dx, self.rect.y + dy):
+            self.rect.x += dx
+            self.rect.y += dy

@@ -1,5 +1,5 @@
 import pygame
-from controller import Controller
+from badcontroller import Controller
 
 
 def main():

@@ -1,8 +1,8 @@
 import pygame
-from maze import Maze
-from dog import Dog
-from ghost import Ghost
-from ghost import Door
+from badmaze import Maze
+from baddog import Dog
+from badghost import Ghost
+from badghost import Door
 from trymain import Dungeon
 
 pygame.init()
