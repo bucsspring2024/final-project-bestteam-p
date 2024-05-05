@@ -52,6 +52,9 @@ background2 = pygame.transform.scale(background2, (1100, 900))
 background3 = pygame.image.load("assets/woods.jpg")
 background3 = pygame.transform.scale(background3, (1100, 900))
 
+background4 = pygame.image.load("assets/intro.jpg")
+background4 = pygame.transform.scale(background4, (1100, 900))
+
 font = pygame.font.Font(None, 36)
 text = font.render("Start", True, (0, 0, 0))
 
@@ -73,12 +76,28 @@ text6 = font6.render("You Escaped", True, (255, 255, 255))
 font7 = pygame.font.Font(None, 40)
 text7 = font7.render("Somehow, you lived to see another day", True, (255, 255, 255))
 
+font8 = pygame.font.Font(None, 40)
+text8 = font8.render("You're on your way back to your village and decide to take a shortcut.", True, (255, 255, 255))
+
+font9 = pygame.font.Font(None, 40)
+text9 = font9.render("There's a door in the hill in front of you. It doesn't look too dangerous...", True, (255, 255, 255))
+
+font10 = pygame.font.Font(None, 40)
+text10 = font10.render("Still, it's always good to stay alert.", True, (255, 255, 255))
+
+font11 = pygame.font.Font(None, 40)
+text11 = font11.render("Use your arrow keys to navigate.", True, (255, 255, 255))
+
+font12 = pygame.font.Font(None, 40)
+text12 = font12.render("Continue", True, (255, 255, 255))
+
 
 
 class Controller:
     def __init__(self):
         self.screen = pygame.display.set_mode((1100, 900))
         self.start_button = pygame.Rect(450, 650, 200, 50)
+        self.click = pygame.Rect(400, 715, 300, 50)
         
     def mainloop(self):
         self.state = "menu"
@@ -89,6 +108,8 @@ class Controller:
                     return
             if self.state == "menu":
                 self.menuloop()
+            elif self.state == "instructions":
+                self.instructionsloop()
             elif self.state == "game":
                 self.gameloop()
             elif self.state == "gameover":
@@ -106,7 +127,7 @@ class Controller:
                     return
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.start_button.collidepoint(event.pos):
-                        self.state = "game"
+                        self.state = "instructions"
                         menu_running = False
             self.screen.blit(background1, (0, 0))
             pygame.draw.rect(self.screen, (115, 147, 179), self.start_button)
@@ -114,11 +135,32 @@ class Controller:
             self.screen.blit(text2, (325, 75))
             self.screen.blit(text3, (405, 190))
             pygame.display.flip()
+        
+            
+    def instructionsloop(self):
+        instructions_running = True
+        while instructions_running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.click.collidepoint(event.pos):
+                        self.state = "game"
+                        instructions_running = False
+            screen.blit(background4, (0, 0))
+            # pygame.draw.rect(screen, (0, 0, 0), text_box)
+            screen.blit(text8, (90, 270))
+            pygame.draw.rect(screen, (0, 0, 0), self.click)
+            screen.blit(text12, (self.click.x + 85, self.click.y + 12))
+            screen.blit(text9, (80, 330))
+            screen.blit(text10, (305, 460))
+            screen.blit(text11, (320, 510))
+            pygame.display.flip()
+            
             
     def gameloop(self):
         run = True
-        
-        pause = False
         
         moving_left = False
         moving_right = False
