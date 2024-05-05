@@ -189,7 +189,7 @@ class Controller:
             else: 
                 # If the game is paused, check if a second has passed
                 if pygame.time.get_ticks() - pause_start_time >= 1500:
-                    run = False
+                    self.state = "gameover"
     
                             
             pygame.display.flip()
