@@ -67,10 +67,10 @@ text4 = font4.render("GAME OVER", True, (255, 255, 255))
 font5 = pygame.font.Font(None, 40)
 text5 = font5.render("Hopefully the next traveller fares better.", True, (255, 255, 255))
 
-font6 = pygame.font.Font(None, 100)
+font6 = pygame.font.Font(None, 150)
 text6 = font6.render("You Escaped", True, (255, 255, 255))
 
-font7 = pygame.font.Font(None, 30)
+font7 = pygame.font.Font(None, 40)
 text7 = font7.render("Somehow, you lived to see another day", True, (255, 255, 255))
 
 
@@ -214,6 +214,6 @@ class Controller:
                     pygame.quit()
                     return
             self.screen.blit(background3, (0, 0))
-            self.screen.blit(text6, (235, 343))
-            self.screen.blit(text7, (263, 430))
+            self.screen.blit(text6, (235, 390))
+            self.screen.blit(text7, (290, 515))
             pygame.display.flip()
