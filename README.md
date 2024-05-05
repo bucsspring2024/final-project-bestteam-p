@@ -23,13 +23,13 @@ My project is a simple dungeon-crawler style game with a dog character trying to
 
 ### Initial Design
 
-![initial gui](assets/gui.jpg) (<in the file listed, I could not get it to go in here.)
+![initial gui](assets/gui.jpg) 
 The user would use their mouse to select different choices displayed on screen. The screen would also show the outcome of their choices. 
 
 ### Final Design
 
-![final gui](assets/finalgui.jpg) (<in the file listed, I could not get it to go in here.)
-The user would use their arrow keys to direct the dog throught the maze and around the ghosts. The end goal is clear, shown by the door, and the enemies consistantly move on the screen.
+![final gui](assets/finalgui.jpg) 
+The user would use their arrow keys to direct the dog throught the maze and around the ghosts. The end goal is clear, shown by the door, and the enemies consistantly move on the screen. The menu and instructions screen are clear too, with clickable buttons that lead the user to actual gameplay.
 
 ## Program Design
 
